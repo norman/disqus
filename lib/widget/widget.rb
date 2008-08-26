@@ -39,9 +39,9 @@ module Disqus
       
       # Loads Javascript to show the number of comments for the page. Options:
       # * <tt>account:</tt> Your Discus account (required).
-      def show_comment_count(opts)
+      def show_comment_counts(opts)
         validate_opts!(opts)
-        <<-WHIMPER
+        scc = <<-WHIMPER
         <script type="text/javascript">
         //<[CDATA[
         (function() {
@@ -52,11 +52,12 @@ module Disqus
         				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
         			}
         		}
-        		document.write('<script type="text/javascript" src="#{ROOT_PATH}#{opts[:account]}/get_num_replies.js' + query + '"></' + 'script>');
+        		document.write('<script type="text/javascript" src="#{ROOT_PATH}get_num_replies.js' + query + '"></' + 'script>');
         	})();
         //]]>
         </script>
         WHIMPER
+        scc % opts[:account]
       end
       
       # Show the main Disqus thread widget. Options:
