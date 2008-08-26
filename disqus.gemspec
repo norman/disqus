@@ -10,18 +10,17 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.authors = ['Norman Clarke']
   s.files = [
-    "CHANGELOG",
     "MIT-LICENSE",
     "README.textile",
     "init.rb",
     "lib/disqus.rb",
-    "lib/widget/widget.rb"
+    "lib/widget/widget.rb",
     "Rakefile",
     ]
   s.test_files = [
     "test/disqus_widget_test.rb",
   ]
   s.rdoc_options = ["--main", "README", "--inline-source", "--line-numbers"]
-  s.extra_rdoc_files = ["README.textile", "CHANGELOG"]
+  s.extra_rdoc_files = ["README.textile"]
 
 end

@@ -5,34 +5,40 @@ module Disqus
     class Error < StandardError ; end
     
     VALID_COLORS = ['blue', 'grey', 'green', 'red', 'orange']
-    VALID_NUM_ITEMS = 5...20
+    VALID_NUM_ITEMS = 5..20
     VALID_DEFAULT_TABS = ['people', 'recent', 'popular']
     VALID_AVATAR_SIZES = [24, 32, 48, 92, 128]
     VALID_ORIENTATIONS = ['horizontal', 'vertical']
 
     ROOT_PATH = 'http://disqus.com/forums/%s/'
-    THREAD = ROOT_PATH + '%s/embed.js'
+    THREAD = ROOT_PATH + 'embed.js'
     COMBO = ROOT_PATH + 'combination_widget.js?num_items=%d&color=%s&default_tab=%s&hide_mods=%d'
     RECENT = ROOT_PATH + 'recent_comments_widget.js?num_items=%d&avatar_size=%d&hide_mods=%d&hide_avatars=%d'
     POPULAR = ROOT_PATH + 'popular_threads_widget.js?num_items=%d&hide_mods=%d'
     TOP = ROOT_PATH + 'top_commenters_widget.js?num_items=%d&avatar_size=%d&hide_avatars=%d&orientation=%s'
     class << self
       
+      # Show the main Disqus thread widget. Options:
+      # * <tt>account:</tt> Your Discus account (required).
       def thread(opts)
-        validate_opts!(opts)
+        opts[:show_powered_by] ||= true
         opts[:view_thread_text] ||= "View the discussion thread"
         opts[:view_thread_text] ||= true
+        validate_opts!(opts)
         t = '<div id="disqus_thread"></div>'
         t << '<script type="text/javascript" src="' + THREAD + '"></script>'
         t << '<noscript><a href="http://%s.disqus.com/?url=ref">'
-        t << options[:view_thread_text]
+        t << opts[:view_thread_text]
         t << '</a></noscript>'
-        if options[:show_powered_by]
+        if opts[:show_powered_by]
           t << '<a href="http://disqus.com" class="dsq-brlink">blog comments '
           t << 'powered by <span class="logo-disqus">Disqus</span></a>'
         end
+        t % [opts[:account], opts[:account]]
       end
       
+      # Loads Javascript to show the number of comments for the page. Options:
+      # * <tt>account:</tt> Your Discus account (required).
       def show_comment_count(opts)
         validate_opts!(opts)
         <<-WHIMPER
@@ -53,6 +59,14 @@ module Disqus
         WHIMPER
       end
       
+      # Show the main Disqus thread widget. Options:
+      # * <tt>account:</tt> Your Discus account (required).
+      # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
+      # * <tt>show_powered_by:</tt> Show or hide the powered by Disqus text.
+      # * <tt>num_items:</tt>: How many items to show.
+      # * <tt>hide_mods:</tt> Don't show moderators.
+      # * <tt>hide_avatars:</tt> Don't show avatars.
+      # * <tt>avatar_size:</tt> Avatar size.
       def top_commenters(opts)
         opts[:header] ||= '<h2 class="dsq-widget-title">Top Commenters</h2>'
         opts[:show_powered_by] ||= true
@@ -62,6 +76,7 @@ module Disqus
         opts[:orientation] ||= 'horizontal'
         opts[:hide_mods] = opts[:hide_mods] ? 1 : 0
         opts[:hide_avatars] = opts[:hide_avatars] ? 1 : 0
+        validate_opts!(opts)        
         tc = '<div id="dsq-topcommenters" class="dsq-widget">'
         tc << opts[:header]
         tc << '<script type="text/javascript" src="' + TOP + '"></script>'
@@ -73,12 +88,18 @@ module Disqus
           opts[:hide_avatars], opts[:hide_mods]]
       end
       
+      # Show the main Disqus thread widget. Options:
+      # * <tt>account:</tt> Your Discus account (required).
+      # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
+      # * <tt>num_items:</tt>: How many items to show.
+      # * <tt>hide_mods:</tt> Don't show moderators.
       def popular_threads(opts)
         opts[:header] ||= '<h2 class="dsq-widget-title">Popular Threads</h2>'
         opts[:show_powered_by] ||= true
         opts[:num_items] ||= 5
         opts[:hide_mods] ||= false
         opts[:hide_mods] = opts[:hide_mods] ? 1 : 0
+        validate_opts!(opts)
         pt = '<div id="dsq-popthreads" class="dsq-widget">'
         pt << opts[:header]
         pt << '<script type="text/javascript" src="' + POPULAR + '"></script>'
@@ -89,6 +110,13 @@ module Disqus
         pt % [opts[:account], opts[:num_items], opts[:hide_mods]]
       end
     
+      # Show the main Disqus thread widget. Options:
+      # * <tt>account:</tt> Your Discus account (required).
+      # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
+      # * <tt>num_items:</tt>: How many items to show.
+      # * <tt>hide_mods:</tt> Don't show moderators.
+      # * <tt>hide_avatars:</tt> Don't show avatars.
+      # * <tt>avatar_size:</tt> Avatar size.
       def recent_comments(opts)
         opts[:header] ||= '<h2 class="dsq-widget-title">Recent Comments</h2>'
         opts[:show_powered_by] ||= true
@@ -110,6 +138,10 @@ module Disqus
           opts[:hide_mods], opts[:hide_avatars]]
       end
     
+      # Show the main Disqus thread widget. Options:
+      # * <tt>account:</tt> Your Discus account (required).
+      # * <tt>num_items:</tt>: How many items to show.
+      # * <tt>hide_mods:</tt> Don't show moderators.
       def combo(opts)
         opts[:num_items] ||= 5
         opts[:hide_mods] ||= false 
@@ -122,7 +154,7 @@ module Disqus
             opts[:default_tab], opts[:hide_mods]]
       end
       
-      protected
+      private
 
       def validate_opts!(opts)
         raise Error.new("You must specify an :account") if !opts[:account]
