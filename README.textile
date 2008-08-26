@@ -15,12 +15,12 @@ h3. Show the comment threads:
 <pre>
 <code>
   # Loads the commenting system
-  &lt;%= Disqus::Widget::thread(:account => "example") %&gt;
+  Disqus::Widget::thread(:account => "example")
   
   # Appends the comment count to a end of link text for a url that ends with
   # #disqus_thread. For example:
   # <a href="http://my.website/article-permalink#disqus_thread">View Comments</a>
-  &lt;%= Discus::Widget::show_comment_count %&gt;
+  Discus::Widget::show_comment_count
 </code>
 </pre>
 
@@ -28,8 +28,7 @@ h3. Show the combo widget:
 
 <pre>
 <code>
-  &lt;%= Disqus::Widget::combo(:account => "example", :color => "blue",
-    :hide_mods => false, :default_tab => "popular", :num_items => 25) %&gt;
+  Disqus::Widget::combo(:account => "example", :color => "blue", :hide_mods => false, :default_tab => "popular", :num_items => 25)
 </code>
 </pre>
 
