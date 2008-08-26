@@ -46,7 +46,7 @@ module Disqus
         				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
         			}
         		}
-        		document.write('<script type="text/javascript" src="http://disqus.com/forums/#{opts[:account]}/get_num_replies.js' + query + '"></' + 'script>');
+        		document.write('<script type="text/javascript" src="#{ROOT_PATH}#{opts[:account]}/get_num_replies.js' + query + '"></' + 'script>');
         	})();
         //]]>
         </script>
