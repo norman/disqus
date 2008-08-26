@@ -28,7 +28,8 @@ h3. Show the combo widget:
 
 <pre>
 <code>
-  Disqus::Widget::combo(:account => "example", :color => "blue", :hide_mods => false, :default_tab => "popular", :num_items => 25)
+  Disqus::Widget::combo(:account => "example", :color => "blue", :hide_mods => false,
+    :default_tab => "popular", :num_items => 25)
 </code>
 </pre>
 
