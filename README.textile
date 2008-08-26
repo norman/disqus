@@ -6,7 +6,7 @@ not just Rails.
 
 h2. Get it
 
-gem install norman-discus  --source http://gems.github.com
+gem install norman-disqus  --source http://gems.github.com
 
 h2. Use it: 
 
@@ -20,7 +20,7 @@ h3. Show the comment threads:
   # Appends the comment count to a end of link text for a url that ends with
   # #disqus_thread. For example:
   # <a href="http://my.website/article-permalink#disqus_thread">View Comments</a>
-  Discus::Widget::show_comment_count
+  Disqus::Widget::show_comment_count
 </code>
 </pre>
 
