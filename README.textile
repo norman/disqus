@@ -1,0 +1,49 @@
+h1. Disqus Ruby Gem
+
+The Disqus Gem helps you easily integrate the "Disqus":http://disqus.com
+commenting system into your website. It works for any site programmed in Ruby,
+not just Rails.
+
+h2. Get it
+
+gem install norman-discus  --source http://gems.github.com
+
+h2. Use it: 
+
+h3. Show the comment threads:
+
+<pre>
+<code>
+  # Loads the commenting system
+  <%= Disqus::Widget::thread(:account => "example") %>
+  
+  # Appends the comment count to a end of link text for a url that ends with
+  # #disqus_thread. For example:
+  # <a href="http://my.website/article-permalink#disqus_thread">View Comments</a>
+  <%= Discus::Widget::show_comment_count %>
+</code>
+</pre>
+
+h3. Show the combo widget:
+
+<pre>
+<code>
+  <%= Disqus::Widget::combo(:account => "example", :color => "blue",
+    :hide_mods => false, :default_tab => "popular", :num_items => 25) %>
+</code>
+</pre>
+
+h2. Hack it:
+
+Github repository: http://github.com/norman/disqus
+
+h2. Complain about it:
+
+"norman@randomba.org":norman@randomba.org
+
+h2. Learn more about Disqus:
+
+"http://disqus.com":http://disqus.com
+
+Copyright (c) 2008 "Norman Clarke":norman@randomba.org, released under
+the MIT license
