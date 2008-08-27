@@ -29,7 +29,6 @@ class DisqusWidgetTest < Test::Unit::TestCase
 
   def test_top_commenters
     assert Disqus::Widget::top_commenters
-    Disqus::Widget::top_commenters
   end
 
   def test_invalid_default_tab

@@ -13,8 +13,10 @@ module Disqus
     :color => "grey",
     :default_tab => "popular",
     :hide_avatars => false,
-    :hide_mods => false,
-    :num_items => 15
+    :hide_mods => true,
+    :num_items => 15,
+    :show_powered_by => true,
+    :orientation => "horizontal"
   }
   
   def self.defaults
