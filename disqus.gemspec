@@ -12,15 +12,18 @@ Gem::Specification.new do |s|
   s.files = [
     "MIT-LICENSE",
     "README.textile",
+    "README.txt",
     "init.rb",
     "lib/disqus.rb",
-    "lib/widget/widget.rb",
+    "lib/disqus/widget.rb",
+    "lib/disqus/rails_view_helpers.rb",
     "Rakefile",
     ]
   s.test_files = [
-    "test/disqus_widget_test.rb",
+    "test/widget_test.rb",
+    "test/rails_view_helpers_test.rb"
   ]
-  s.rdoc_options = ["--main", "README", "--inline-source", "--line-numbers"]
-  s.extra_rdoc_files = ["README.textile"]
+  s.rdoc_options = ["--main", "README.txt", "--inline-source", "--line-numbers"]
+  s.extra_rdoc_files = ["README.txt"]
 
 end

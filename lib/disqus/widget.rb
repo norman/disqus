@@ -20,7 +20,8 @@ module Disqus
       
       # Show the main Disqus thread widget. Options:
       # * <tt>account:</tt> Your Discus account (required).
-      def thread(opts)
+      def thread(opts = {})
+        opts = Disqus::defaults.merge(opts)
         opts[:show_powered_by] ||= true
         opts[:view_thread_text] ||= "View the discussion thread"
         opts[:view_thread_text] ||= true
@@ -39,7 +40,8 @@ module Disqus
       
       # Loads Javascript to show the number of comments for the page. Options:
       # * <tt>account:</tt> Your Discus account (required).
-      def show_comment_counts(opts)
+      def comment_counts(opts = {})
+        opts = Disqus::defaults.merge(opts)        
         validate_opts!(opts)
         scc = <<-WHIMPER
         <script type="text/javascript">
@@ -68,7 +70,8 @@ module Disqus
       # * <tt>hide_mods:</tt> Don't show moderators.
       # * <tt>hide_avatars:</tt> Don't show avatars.
       # * <tt>avatar_size:</tt> Avatar size.
-      def top_commenters(opts)
+      def top_commenters(opts = {})
+        opts = Disqus::defaults.merge(opts)
         opts[:header] ||= '<h2 class="dsq-widget-title">Top Commenters</h2>'
         opts[:show_powered_by] ||= true
         opts[:num_items] ||= 5
@@ -94,7 +97,8 @@ module Disqus
       # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
       # * <tt>num_items:</tt>: How many items to show.
       # * <tt>hide_mods:</tt> Don't show moderators.
-      def popular_threads(opts)
+      def popular_threads(opts = {})
+        opts = Disqus::defaults.merge(opts)
         opts[:header] ||= '<h2 class="dsq-widget-title">Popular Threads</h2>'
         opts[:show_powered_by] ||= true
         opts[:num_items] ||= 5
@@ -118,7 +122,8 @@ module Disqus
       # * <tt>hide_mods:</tt> Don't show moderators.
       # * <tt>hide_avatars:</tt> Don't show avatars.
       # * <tt>avatar_size:</tt> Avatar size.
-      def recent_comments(opts)
+      def recent_comments(opts = {})
+        opts = Disqus::defaults.merge(opts)
         opts[:header] ||= '<h2 class="dsq-widget-title">Recent Comments</h2>'
         opts[:show_powered_by] ||= true
         opts[:num_items] ||= 5
@@ -143,7 +148,8 @@ module Disqus
       # * <tt>account:</tt> Your Discus account (required).
       # * <tt>num_items:</tt>: How many items to show.
       # * <tt>hide_mods:</tt> Don't show moderators.
-      def combo(opts)
+      def combo(opts = {})
+        opts = Disqus::defaults.merge(opts)
         opts[:num_items] ||= 5
         opts[:hide_mods] ||= false 
         opts[:color] ||= 'blue'
