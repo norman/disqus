@@ -25,12 +25,20 @@ module Disqus
   
   def self.enable_rails
     return if ActionView::Base.instance_methods.include? 'disqus_thread'
-    require 'disqus/rails_view_helpers'
-    ActionView::Base.class_eval { include Disqus::RailsViewHelpers }
+    require 'disqus/view_helpers'
+    ActionView::Base.class_eval { include Disqus::ViewHelpers }
+  end
+
+  def self.enable_merb
+    return if Merb::Controller.instance_methods.include? 'disqus_thread'
+    require 'disqus/view_helpers'
+    Merb::Controller.class_eval { include Disqus::ViewHelpers }
   end
 
 end
 
 if defined?(Rails) and defined?(ActionView)
   Disqus::enable_rails
+elsif defined?(Merb)
+  Disqus::enable_merb
 end
