@@ -90,5 +90,11 @@ h2. Thanks to the following contributors:
 
 * "Quin Hoxie":http://github.com/qhoxie - Merb support
 
+h2. Legal Stuff
+
+The Disqus Ruby gem was not created by, nor is officially supported by
+Disqus.com or Big Head Labs, Inc. Use it at your own risk and your own
+responsibility under the terms of the MIT License.
+
 Copyright (c) 2008 "Norman Clarke":norman@randomba.org, released under
 the MIT license
