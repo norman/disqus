@@ -4,6 +4,10 @@ The Disqus Gem helps you easily integrate the "Disqus":http://disqus.com
 commenting system into your website. It works for any site programmed in Ruby,
 and has view helpers for Rails and Merb.
 
+At the moment it only supports Disqus Javascript widgets. An implementation of
+the Disqus API is underway (in the "api" repository branch) and will be
+released soon.
+
 h2. Get it
 
 h3. Stable release:
