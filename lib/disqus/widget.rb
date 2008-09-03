@@ -1,9 +1,14 @@
 module Disqus
 
+  # Disqus Widget generator.
+  #
+  # All of the methods accept various options, and "account" is required for
+  # all of them. You can avoid having to pass in the account each time by
+  # setting it in the defaults like this:
+  #
+  #  Disqus::defaults[:account] = "my_account"
   class Widget
   
-    class Error < StandardError ; end
-    
     VALID_COLORS = ['blue', 'grey', 'green', 'red', 'orange']
     VALID_NUM_ITEMS = 5..20
     VALID_DEFAULT_TABS = ['people', 'recent', 'popular']
@@ -18,7 +23,8 @@ module Disqus
     TOP = ROOT_PATH + 'top_commenters_widget.js?num_items=%d&avatar_size=%d&orientation=%s'
     class << self
       
-      # Show the main Disqus thread widget. Options:
+      # Show the main Disqus thread widget.
+      # Options:
       # * <tt>account:</tt> Your Discus account (required).
       def thread(opts = {})
         opts = Disqus::defaults.merge(opts)
@@ -36,7 +42,15 @@ module Disqus
         s % [opts[:account], opts[:account]]
       end
       
-      # Loads Javascript to show the number of comments for the page. Options:
+      # Loads Javascript to show the number of comments for the page.
+      #
+      # The Javascript sets the inner html to the comment count for any links
+      # on the page that have the anchor "disqus_thread". For example, "View
+      # Comments" below would be replaced by "1 comment" or "23 comments" etc.
+      #
+      #   <a href="http://my.website/article-permalink#disqus_thread">View Comments</a>
+      #   <a href="http://my.website/different-permalink#disqus_thread">View Comments</a>
+      # Options:
       # * <tt>account:</tt> Your Discus account (required).
       def comment_counts(opts = {})
         opts = Disqus::defaults.merge(opts)        
@@ -60,7 +74,8 @@ module Disqus
         s % opts[:account]
       end
       
-      # Show the main Disqus thread widget. Options:
+      # Show the top commenters Disqus thread widget.
+      # Options:
       # * <tt>account:</tt> Your Discus account (required).
       # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
       # * <tt>show_powered_by:</tt> Show or hide the powered by Disqus text.
@@ -86,7 +101,8 @@ module Disqus
         s % [opts[:account], opts[:num_items], opts[:avatar_size], opts[:orientation]]
       end
       
-      # Show the main Disqus thread widget. Options:
+      # Show the popular threads Disqus widget.
+      # Options:
       # * <tt>account:</tt> Your Discus account (required).
       # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
       # * <tt>num_items:</tt>: How many items to show.
@@ -106,7 +122,8 @@ module Disqus
         s % [opts[:account], opts[:num_items]]
       end
     
-      # Show the main Disqus thread widget. Options:
+      # Show the recent comments Disqus widget.
+      # Options:
       # * <tt>account:</tt> Your Discus account (required).
       # * <tt>header:</tt> HTML snipper with header (default h2) tag and text.
       # * <tt>num_items:</tt>: How many items to show.
@@ -129,10 +146,13 @@ module Disqus
         s % [opts[:account], opts[:num_items], opts[:avatar_size]]
       end
     
-      # Show the main Disqus thread widget. Options:
-      # * <tt>account:</tt> Your Discus account (required).
-      # * <tt>num_items:</tt>: How many items to show.
-      # * <tt>hide_mods:</tt> Don't show moderators.
+      # Show the Disqus combo widget. This is a three-tabbed box with links
+      # popular threads, top posters, and recent threads.
+      # Options:
+      # * <tt>:account:</tt> Your Discus account (required).
+      # * <tt>:num_items:</tt> How many items to show.
+      # * <tt>:hide_mods:</tt> Don't show moderators.
+      # * <tt>:default_tab:</tt> Should be 'people', 'recent', or 'popular'.
       def combo(opts = {})
         opts = Disqus::defaults.merge(opts)
         validate_opts!(opts)
@@ -146,12 +166,12 @@ module Disqus
       private
 
       def validate_opts!(opts)
-        raise Error.new("You must specify an :account") if !opts[:account]
-        raise Error.new("Invalid color") if opts[:color] && !VALID_COLORS.include?(opts[:color])
-        raise Error.new("Invalid num_items") if opts[:num_items] && !VALID_NUM_ITEMS.include?(opts[:num_items])
-        raise Error.new("Invalid default_tab") if opts[:default_tab] && !VALID_DEFAULT_TABS.include?(opts[:default_tab])
-        raise Error.new("Invalid avatar size") if opts[:avatar_size] && !VALID_AVATAR_SIZES.include?(opts[:avatar_size])
-        raise Error.new("Invalid orientation") if opts[:orientation] && !VALID_ORIENTATIONS.include?(opts[:orientation])
+        raise ArgumentError.new("You must specify an :account") if !opts[:account]
+        raise ArgumentError.new("Invalid color") if opts[:color] && !VALID_COLORS.include?(opts[:color])
+        raise ArgumentError.new("Invalid num_items") if opts[:num_items] && !VALID_NUM_ITEMS.include?(opts[:num_items])
+        raise ArgumentError.new("Invalid default_tab") if opts[:default_tab] && !VALID_DEFAULT_TABS.include?(opts[:default_tab])
+        raise ArgumentError.new("Invalid avatar size") if opts[:avatar_size] && !VALID_AVATAR_SIZES.include?(opts[:avatar_size])
+        raise ArgumentError.new("Invalid orientation") if opts[:orientation] && !VALID_ORIENTATIONS.include?(opts[:orientation])
       end
       
     end

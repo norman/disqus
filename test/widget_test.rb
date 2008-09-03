@@ -32,25 +32,25 @@ class DisqusWidgetTest < Test::Unit::TestCase
   end
 
   def test_invalid_default_tab
-    assert_raises Disqus::Widget::Error do
+    assert_raises ArgumentError do
       Disqus::Widget::combo(:default_tab => "test")
     end
   end
 
   def test_invalid_color
-    assert_raises Disqus::Widget::Error do
+    assert_raises ArgumentError do
       Disqus::Widget::combo(:color => "test")
     end
   end
 
   def test_invalid_num_items
-    assert_raises Disqus::Widget::Error do
+    assert_raises ArgumentError do
       Disqus::Widget::combo(:num_items => 100)
     end
   end
 
   def test_invalid_avatar_size
-    assert_raises Disqus::Widget::Error do
+    assert_raises ArgumentError do
       Disqus::Widget::top_commenters(:avatar_size => 100)
     end
   end

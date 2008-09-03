@@ -33,16 +33,20 @@ h3. Show the comment threads on a post page:
 <pre>
 <code>
   # Loads the commenting system
-  Disqus::Widget::thread
-  # Or if you're using Rails/Merb:
   disqus_thread
   
-  # Appends the comment count to a end of link text for a url that ends with
-  # #disqus_thread. For example:
+  # Or if you're not using Rails/Merb:
+  Disqus::Widget::thread
+  
+  # Sets the inner html to the comment count for any links on the page that
+  # have the anchor "disqus_thread". For example, "View Comments" below would
+  # be replaced by "1 comment" or "23 comments" etc.
   # <a href="http://my.website/article-permalink#disqus_thread">View Comments</a>
-  Disqus::Widget::comment_counts
-  # Or if you're using Rails/Merb:
+  # <a href="http://my.website/different-permalink#disqus_thread">View Comments</a>
   disqus_comment_counts
+  
+  # Or if you're not using Rails/Merb:
+  Disqus::Widget::comment_counts
 </code>
 </pre>
 
@@ -50,9 +54,10 @@ h3. Show the combo widget on a post page:
 
 <pre>
 <code>
-  Disqus::Widget::combo(:color => "blue", :hide_mods => false, :num_items => 25)
-  # Or if you're using Rails/Merb:
   disqus_combo(:color => "blue", :hide_mods => false, :num_items => 25)
+  
+  # Or for non-Rails/Merb:
+  Disqus::Widget::combo(:color => "blue", :hide_mods => false, :num_items => 25)
 </code>
 </pre>
 
@@ -62,9 +67,10 @@ h3. Show the comment count on a permalink:
 <code>
   link_to("Permalink", post_path(@post, :anchor => "disqus_thread"))
   ...
-  Disqus::Widget::comment_counts
-  # Or for Rails/Merb:
   disqus_comment_counts
+  
+  # Or for non-Rails/Merb:
+  Disqus::Widget::comment_counts
 </code>
 </pre>    
 
@@ -79,6 +85,10 @@ h2. Complain about it:
 h2. Learn more about Disqus:
 
 "http://disqus.com":http://disqus.com
+
+h2. Thanks to the following contributors:
+
+* "Quin Hoxie":http://github.com/qhoxie - Merb support
 
 Copyright (c) 2008 "Norman Clarke":norman@randomba.org, released under
 the MIT license

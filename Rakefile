@@ -38,5 +38,5 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.title    = 'Disqus'
   rdoc.options << '--line-numbers' << '--inline-source' << '-c UTF-8'
   rdoc.rdoc_files.include('lib/**/*.rb')
-  rdoc.rdoc_files.include('README.txt')
+  rdoc.rdoc_files.include('README.textile')
 end
