@@ -1,0 +1,23 @@
+{
+  "message": {
+    "id": "12345", 
+    "forum": "1234",
+    "thread": "123",
+    "created_at": "2008-01-03 14:44:07.627492", 
+    "message": "This is a mock post",
+    "parent_post": null,
+    "shown": true,
+    "is_anonymous": false,
+    "author": {
+      "id":12,
+      "username":"testuser",
+      "display_name":"Test User",
+      "url":"http://www.example.com/testuser",
+      "email_hash":"thisisanMD5hash",
+      "has_avatar": true
+    }
+  }, 
+  "code": "ok", 
+  "succeeded": true
+}
+
