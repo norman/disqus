@@ -18,6 +18,22 @@ module Disqus
       identifier     == other_thread.identifier
     end
     
+    def self.list(forum, opts = {})
+      response = Disqus::Api::get_thread_list(opts.merge(:forum_id =>forum.id, :forum_api_key => forum.key))
+      if response["succeeded"]
+        list = response["message"].map do |thread| 
+          Thread.new( thread["id"],
+                      forum,
+                      thread["slug"],
+                      thread["title"],
+                      thread["created_at"],
+                      thread["allow_comments"],
+                      thread["url"],
+                      thread["identifier"] )
+        end
+      end
+    end
+    
   end
   
 end

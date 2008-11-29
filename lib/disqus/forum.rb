@@ -1,10 +1,12 @@
 module Disqus
 
   class Forum
-    attr_reader :id, :shortname, :name, :created_at, :key
+    attr_reader :id, :shortname, :name, :created_at
     
-    def initialize(id, shortname, name, key=nil)
+    def initialize(id, shortname, name, created_at)
       @id, @shortname, @name = id.to_i, shortname, name
+      @key = nil
+      @threads = []
     end
 
     def ==(other_forum)
@@ -32,7 +34,14 @@ module Disqus
       response = Disqus::Api::get_forum_api_key(opts.merge(:forum_id => self.id))
       @key = response["message"] if response["succeeded"]
     end
-
+    
+    def key
+      @key ||= load_key
+    end
+    
+    def load_threads
+      @threads = Disqus::Thread.list(self)
+    end
   end
 end
 
