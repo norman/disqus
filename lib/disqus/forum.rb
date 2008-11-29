@@ -8,10 +8,10 @@ module Disqus
     end
 
     def ==(other_forum)
-      id        == other_forum.id       
-      shortname == other_forum.shortname
-      name      == other_forum.name     
-      key       == other_forum.key      
+      id        == other_forum.id        &&
+      shortname == other_forum.shortname &&
+      name      == other_forum.name      &&
+      key       == other_forum.key
     end
 
     def self.list(opts = {})
