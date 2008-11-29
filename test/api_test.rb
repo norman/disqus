@@ -26,7 +26,7 @@ class ApiTest < Test::Unit::TestCase
   
   def test_get_forum_api_key
     mock_get_response('get_forum_api_key.json')
-    forum_api_key = Disqus::Api::get_forum_api_key(:forum_id => 1234, :forum_api_key=>"FAKE_KEY")
+    forum_api_key = Disqus::Api::get_forum_api_key(:forum_id => 1234, :user_api_key=>"FAKE_KEY")
     assert_equal "FAKE_FORUM_API_KEY", forum_api_key["message"]
   end
   
