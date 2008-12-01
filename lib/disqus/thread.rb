@@ -4,7 +4,7 @@ module Disqus
     attr_reader :id, :forum, :slug, :title, :created_at, :allow_comments, :url, :identifier, :forum, :posts
     
     def initialize(id, forum, slug, title, created_at, allow_comments, url, identifier)
-      @id, @forum, @slug, @title, @created_at, @allow_comments, @url, @identifier = id.to_i, forum, slug, title, created_at, allow_comments, url, identifier
+      @id, @forum, @slug, @title, @created_at, @allow_comments, @url, @identifier = id.to_i, forum, slug, title, Time.parse(created_at.to_s), allow_comments, url, identifier
       @posts = []
     end
 

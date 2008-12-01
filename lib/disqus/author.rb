@@ -8,6 +8,11 @@ module Disqus
     def initialize(id, username, display_name, url, email_hash, has_avatar)
       @id, @username, @display_name, @url, @email_hash, @has_avatar = id, username, display_name, url, email_hash, has_avatar
     end
+    
+    def name
+      @display_name.blank? ? @username : @display_name
+    end
+    
   end
   
   class AnonymousAuthor < BaseAuthor

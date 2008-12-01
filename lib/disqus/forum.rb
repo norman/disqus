@@ -4,7 +4,7 @@ module Disqus
     attr_reader :id, :shortname, :name, :created_at, :threads
     
     def initialize(id, shortname, name, created_at)
-      @id, @shortname, @name = id.to_i, shortname, name
+      @id, @shortname, @name, @created_at = id.to_i, shortname, name, Time.parse(created_at.to_s)
       @key = nil
       @threads = []
     end
