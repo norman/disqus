@@ -3,6 +3,7 @@ require 'yaml'
 require 'disqus'
 require 'disqus/api'
 require 'disqus/forum'
+require 'disqus/thread'
 require 'mocha'
 
 DISQUS_TEST = YAML.load(File.read(File.dirname(__FILE__) + "/config.yml"))
@@ -32,11 +33,40 @@ class ForumTest < Test::Unit::TestCase
     assert_equal "FAKE_FORUM_API_KEY", forum.load_key
   end
   
+  def test_load_threads
+    forum = create_forum
+    Disqus::Thread.expects(:list).with(forum).returns([thread = mock()])
+    forum.load_threads
+    assert_equal [thread], forum.threads
+  end
+  
+  def test_get_thread_by_url
+    mock_api_call(:get_thread_by_url)
+    forum = create_forum
+    thread = forum.get_thread_by_url("http://www.example.com")
+    expected = Disqus::Thread.new("7651269", forum, "test_thread", "Test thread", "2008-11-28T01:47", true, "FAKE_URL", nil)
+    assert_equal expected, thread
+  end
+  
+  def test_get_thread_by_identifier
+    mock_api_call(:thread_by_identifier)
+    forum = create_forum
+    thread = forum.get_thread_by_identifier("FAKE_IDENTIFIER", "")
+    expected = Disqus::Thread.new("7651269", forum, "test_thread", "Test thread", "2008-11-28T01:47", true, "FAKE_URL", "FAKE_IDENTIFIER")
+    assert_equal expected, thread
+  end
+  
+
+  
   
   private
   
-  def create_forum
+  def create_forum 
     Disqus::Forum.new(1234, "disqus-test", "Disqus Test", "2008-01-03 14:44:07.627492")
+  end
+  
+  def create_thread
+    Disqus::Thread.new("7651269", forum, "test_thread", "Test thread", "2008-11-28T01:47", true, "FAKE_URL", nil)
   end
   
   def mock_api_call(method_name)

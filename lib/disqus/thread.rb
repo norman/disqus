@@ -1,10 +1,11 @@
 module Disqus
 
   class Thread
-    attr_reader :id, :forum, :slug, :title, :created_at, :allow_comments, :url, :identifier
+    attr_reader :id, :forum, :slug, :title, :created_at, :allow_comments, :url, :identifier, :forum, :posts
     
     def initialize(id, forum, slug, title, created_at, allow_comments, url, identifier)
       @id, @forum, @slug, @title, @created_at, @allow_comments, @url, @identifier = id.to_i, forum, slug, title, created_at, allow_comments, url, identifier
+      @posts = []
     end
 
     def ==(other_thread)
@@ -32,6 +33,20 @@ module Disqus
                       thread["identifier"] )
         end
       end
+    end
+    
+    def load_posts(opts = {})
+      @posts = Post.list(self, opts)
+    end
+    
+    def update(opts = {})
+      result = Disqus::Api::update_thread(opts.merge( :forum_api_key  => forum.key,
+                                                      :thread_id      => id,
+                                                      :title          => title,
+                                                      :slug           => slug,
+                                                      :url            => url,
+                                                      :allow_comments => allow_comments))
+      return result["succeeded"]
     end
     
   end

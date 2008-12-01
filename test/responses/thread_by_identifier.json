@@ -6,8 +6,7 @@
       "title": "Test thread", 
       "url": "FAKE_URL", 
       "id": "7651269", 
-      "identifier": null, 
-      "hidden": false, 
+      "identifier": "FAKE_IDENTIFIER", 
       "created_at": "2008-11-28T01:47", 
       "allow_comments": true
     },
