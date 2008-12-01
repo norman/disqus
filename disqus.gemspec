@@ -24,10 +24,12 @@ Gem::Specification.new do |s|
     "Rakefile",
     ]
   s.test_files = [
-    "test/widget_test.rb",
-    "test/view_helpers_test.rb",
+    
     "test/api_test.rb",
-    "test/forum_test.rb"
+    "test/forum_test.rb",
+    "test/thread_test.rb",
+    "test/view_helpers_test.rb",
+    "test/widget_test.rb",
   ]
   s.rdoc_options = ["--main", "README.textile", "--inline-source", "--line-numbers"]
   s.extra_rdoc_files = ["README.textile"]

@@ -24,14 +24,11 @@
       "message": "This is another mock post",
       "parent_post": null,
       "shown": true,
-      "is_anonymous": false,
-      "author": {
+      "is_anonymous": true,
+      "anonymous_author": {
         "id":12,
-        "username":"testuser",
-        "display_name":"Test User",
-        "url":"http://www.example.com/testuser",
-        "email_hash":"thisisanMD5hash",
-        "has_avatar": true
+        "name":"Anonymous Coward",
+        "email_hash":"thisisanMD5hash"
       }
   }], 
   "code": "ok", 

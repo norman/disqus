@@ -1,14 +1,9 @@
-require 'test/unit'
-require 'yaml'
-require 'disqus'
-require 'disqus/api'
-require 'mocha'
-
-DISQUS_TEST = YAML.load(File.read(File.dirname(__FILE__) + "/config.yml"))
+require File.dirname(__FILE__) + '/test_helper'
 
 class ApiTest < Test::Unit::TestCase
   
   def setup
+    require 'disqus'
     Disqus.defaults[:api_key] = DISQUS_TEST["api_key"]
   end
   
