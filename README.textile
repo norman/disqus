@@ -12,10 +12,10 @@ h3. Stable release:
   gem install disqus
 </code>
 
-h3. Bleeding edge:
+h3. Disqus API enabled branch:
 
 <code>
-  gem install norman-disqus  --source http://gems.github.com
+  gem install disqus-api  --source http://gems.github.com
 </code>
 
 h2. Use it:
