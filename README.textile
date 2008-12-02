@@ -6,7 +6,7 @@ and has view helpers for Rails and Merb.
 
 h2. Get it
 
-h3. Stable release:
+h3. Stable release, without API code:
 
 <code>
   gem install disqus
@@ -25,6 +25,7 @@ h3. Configure it:
 <pre>
 <code>
   Disqus::defaults[:account] = "my_account"
+  Disqus::defaults[:api_key] = "my_api_key_from_disqus"
 </code>
 </pre>
 
