@@ -127,7 +127,6 @@ module Disqus
       # * <tt>:forum_api_key</tt> - the API key for the forum
       # * <tt>:thread_id</tt> - the ID of a thread belonging to the given forum
       def get_thread_posts(opts = {})
-        opts[:api_key] ||= Disqus::defaults[:api_key]
         JSON.parse(get('get_thread_posts', :thread_id => opts[:thread_id], :forum_api_key => opts[:forum_api_key]))
       end
       

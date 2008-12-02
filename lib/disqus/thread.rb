@@ -1,7 +1,7 @@
 module Disqus
 
   class Thread
-    attr_reader :id, :forum, :slug, :title, :created_at, :allow_comments, :url, :identifier, :forum, :posts
+    attr_reader :id, :forum, :slug, :title, :created_at, :allow_comments, :url, :identifier, :forum
     
     def initialize(id, forum, slug, title, created_at, allow_comments, url, identifier)
       @id, @forum, @slug, @title, @created_at, @allow_comments, @url, @identifier = id.to_i, forum, slug, title, Time.parse(created_at.to_s), allow_comments, url, identifier
@@ -34,9 +34,13 @@ module Disqus
         end
       end
     end
-    
-    def load_posts(opts = {})
-      @posts = Post.list(self, opts)
+
+    # returns an Array of posts belonging to this thread
+    def posts(force_update = false)
+      if (@posts.nil? or @posts.empty? or force_update)
+        @posts = Disqus::Post.list(self)
+      end
+      @posts
     end
     
     def update(opts = {})

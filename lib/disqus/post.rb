@@ -7,8 +7,8 @@ module Disqus
          @id, @forum, @thread, @created_at, @message, @parent_post, @shown, @is_anonymous, @author = id.to_i, forum, thread, Time.parse(created_at.to_s), message, parent_post, shown, is_anonymous, author
     end
     
-    def self.list(thread, opts = {})
-      response = Disqus::Api::get_thread_posts(opts.merge(:thread_id =>thread.id, :forum_api_key => thread.forum.key))
+    def self.list(thread)
+      response = Disqus::Api::get_thread_posts(:thread_id =>thread.id, :forum_api_key => thread.forum.key)
       if response["succeeded"]
         posts = response["message"].map do |post|
           author = nil
