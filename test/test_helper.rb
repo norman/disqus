@@ -24,3 +24,7 @@ def mock_api_call(method_name)
   Disqus::Api.expects(method_name.to_sym).returns(JSON.parse(File.read(File.dirname(__FILE__) + "/responses/#{method_name}.json"))) 
 end
 
+def stub_api_call(method_name)
+  Disqus::Api.stubs(method_name.to_sym).returns(JSON.parse(File.read(File.dirname(__FILE__) + "/responses/#{method_name}.json"))) 
+end
+

@@ -5,6 +5,7 @@ class ForumTest < Test::Unit::TestCase
   def setup
     require 'disqus'
     Disqus.defaults[:api_key] = DISQUS_TEST["api_key"]
+    stub_api_call(:get_forum_api_key)
   end
 
   def test_forum_list
@@ -41,10 +42,10 @@ class ForumTest < Test::Unit::TestCase
     assert_equal expected, thread
   end
   
-  def test_get_thread_by_identifier
+  def test_thread_by_identifier
     mock_api_call(:thread_by_identifier)
     forum = create_forum
-    thread = forum.get_thread_by_identifier("FAKE_IDENTIFIER", "")
+    thread = forum.thread_by_identifier("FAKE_IDENTIFIER", "")
     expected = Disqus::Thread.new("7651269", forum, "test_thread", "Test thread", "2008-11-28T01:47", true, "FAKE_URL", "FAKE_IDENTIFIER")
     assert_equal expected, thread
   end

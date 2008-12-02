@@ -19,7 +19,9 @@ module Disqus
     def self.list(opts = {})
       response = Disqus::Api::get_forum_list(opts)
       if response["succeeded"]
-        list = response["message"].map{|forum| Forum.new(forum["id"], forum["shortname"], forum["name"], forum["created_at"])}
+        return response["message"].map{|forum| Forum.new(forum["id"], forum["shortname"], forum["name"], forum["created_at"])}
+      else
+        raise_api_error(response)
       end
     end
     
@@ -32,7 +34,11 @@ module Disqus
     
     def load_key(opts = {})
       response = Disqus::Api::get_forum_api_key(opts.merge(:forum_id => self.id))
-      @key = response["message"] if response["succeeded"]
+      if response["succeeded"]
+        return @key = response["message"] 
+      else
+        raise_api_error(response)
+      end
     end
     
     def key
@@ -48,15 +54,19 @@ module Disqus
       if response["succeeded"]
         t = response["message"]
         Thread.new(t["id"], self, t["slug"], t["title"], t["created_at"], t["allow_comments"], t["url"], t["identifier"])
+      else
+        raise_api_error(response)
       end
     end
     
-    def get_thread_by_identifier(identifier, title, opts = {})
+    def thread_by_identifier(identifier, title, opts = {})
       # TODO - should we separate thread retrieval from thread creation? The API to me seems confusing here.
       response = Disqus::Api::thread_by_identifier(opts.merge(:identifier => identifier, :title => title, :forum_api_key => key))
       if response["succeeded"]
         t = response["message"]["thread"]
         Thread.new(t["id"], self, t["slug"], t["title"], t["created_at"], t["allow_comments"], t["url"], t["identifier"])
+      else
+        raise_api_error(response)
       end
     end
     
@@ -70,5 +80,10 @@ module Disqus
       return result["succeeded"]
     end
     
+    protected
+    
+    def raise_api_error(response)
+      raise "Error: #{response['code']}: #{response['message']}"
+    end
   end
 end
