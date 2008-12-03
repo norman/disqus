@@ -8,6 +8,7 @@ module Disqus
       @posts = []
     end
 
+    # Threads are equal if all their attributes are equal.
     def ==(other_thread)
       id             == other_thread.id             &&
       forum          == other_thread.forum          &&
@@ -19,6 +20,7 @@ module Disqus
       identifier     == other_thread.identifier
     end
     
+    # returns an array of Thread objects representing the threads belonging to the given Forum.
     def self.list(forum, opts = {})
       response = Disqus::Api::get_thread_list(opts.merge(:forum_id =>forum.id, :forum_api_key => forum.key))
       if response["succeeded"]
@@ -43,6 +45,14 @@ module Disqus
       @posts
     end
     
+    # Sets the provided values on the thread object.
+    #
+    # options:
+    # *  :thread_id     
+    # *  :title         
+    # *  :slug          
+    # *  :url           
+    # *  :allow_comments
     def update(opts = {})
       result = Disqus::Api::update_thread(opts.merge( :forum_api_key  => forum.key,
                                                       :thread_id      => id,

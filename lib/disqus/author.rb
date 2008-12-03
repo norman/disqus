@@ -9,6 +9,7 @@ module Disqus
       @id, @username, @display_name, @url, @email_hash, @has_avatar = id, username, display_name, url, email_hash, has_avatar
     end
     
+    # returns the user's <tt>display_name</tt> or <tt>username</tt> if <tt>display_name</tt> is blank.
     def name
       @display_name.blank? ? @username : @display_name
     end

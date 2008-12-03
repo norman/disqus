@@ -7,6 +7,7 @@ module Disqus
          @id, @forum, @thread, @created_at, @message, @parent_post, @shown, @is_anonymous, @author = id.to_i, forum, thread, Time.parse(created_at.to_s), message, parent_post, shown, is_anonymous, author
     end
     
+    # Returns an array of Post objects representing all posts belonging to the given thread. The arrays is sorted in order of created_at date.
     def self.list(thread)
       response = Disqus::Api::get_thread_posts(:thread_id =>thread.id, :forum_api_key => thread.forum.key)
       if response["succeeded"]
@@ -39,3 +40,5 @@ module Disqus
     end
   end
 end
+
+
