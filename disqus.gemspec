@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   s.name = "disqus-api"
-  s.version = "0.1.1"
-  s.date = "2008-09-03"
-  s.rubyforge_project = 'disqus-api'  
+  s.version = "0.2.0"
+  s.date = "2008-12-09"
+  s.rubyforge_project = 'disqus'
   s.summary = "Integrates Disqus commenting system into your Ruby-powered site."
   s.email = 'norman@randomba.org'
   s.homepage = 'http://randomba.org'
   s.description = 'Integrates Disqus into your Ruby-powered site. Works with any Ruby website, and has view helpers for Rails and Merb.'
   s.has_rdoc = true
-  s.authors = ['Norman Clarke','Matt Van Horn']
+  s.authors = ['Norman Clarke', 'Matt Van Horn']
   s.files = [
     "MIT-LICENSE",
     "README.textile",
