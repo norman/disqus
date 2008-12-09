@@ -1,0 +1,16 @@
+{
+  "message": [
+    {
+      "id": "12345",
+      "forum": "1234",
+      "slug": "this_is_a_thread",
+      "title": "This is a thread",
+      "created_at": "2008-01-03 14:44:07.627492", 
+      "allow_comments": true, 
+      "url":"http://www.example.com/testthread",
+      "identifier": "this_is_the_thread_identifier"
+    }
+  ], 
+  "code": "ok", 
+  "succeeded": true
+}

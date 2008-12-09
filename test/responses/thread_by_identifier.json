@@ -1,0 +1,17 @@
+{ 
+  "message":{
+    "thread":{
+      "slug": "test_thread", 
+      "forum": "60732", 
+      "title": "Test thread", 
+      "url": "FAKE_URL", 
+      "id": "7651269", 
+      "identifier": "FAKE_IDENTIFIER", 
+      "created_at": "2008-11-28T01:47", 
+      "allow_comments": true
+    },
+    "created": false
+  }, 
+  "succeeded": true, 
+  "code": "ok"
+}

@@ -1,1 +1,6 @@
 require 'disqus'
+require 'disqus/api'
+require 'disqus/author'
+require 'disqus/forum'
+require 'disqus/post'
+require 'disqus/thread'

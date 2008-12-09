@@ -1,0 +1,3 @@
+# This can be used to do actual calls to the API rather than use mocks during
+# testing. This can be useful to verify tests against API changes.
+api_key: 'YOUR DISQUS USER API KEY GOES HERE'

@@ -7,6 +7,7 @@ require 'disqus/widget'
 module Disqus
   
   @defaults = {
+    :api_key => "",
     :account => "",
     :avatar_size => 48,
     :color => "grey",
