@@ -61,6 +61,12 @@ class ApiTest < Test::Unit::TestCase
     assert result["succeeded"]
   end
   
+  def test_comment_form
+    c = Disqus::Api::comment_form("myforum", "mythread")
+    assert_match /myforum/, c
+    assert_match /mythread/, c
+  end
+  
   private
   
   def mock_get_response(file)

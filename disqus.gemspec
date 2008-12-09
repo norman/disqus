@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ['Norman Clarke', 'Matt Van Horn']
   s.files = [
     "MIT-LICENSE",
-    "README.textile",
+    "README.rdoc",
     "init.rb",
     "lib/disqus.rb",
     "lib/disqus/api.rb",
@@ -45,7 +45,6 @@ Gem::Specification.new do |s|
     "test/responses/thread_by_identifier.json",
     "test/responses/update_thread.json"
   ]
-  s.rdoc_options = ["--main", "README.textile", "--inline-source", "--line-numbers"]
-  s.extra_rdoc_files = ["README.textile"]
+  s.rdoc_options = ["--main", "README.rdoc", "--inline-source", "--line-numbers"]
 end
 

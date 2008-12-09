@@ -20,24 +20,26 @@ module Disqus
       identifier     == other_thread.identifier
     end
     
-    # returns an array of Thread objects representing the threads belonging to the given Forum.
+    # Returns an array of Thread objects representing the threads belonging to the given Forum.
     def self.list(forum, opts = {})
       response = Disqus::Api::get_thread_list(opts.merge(:forum_id =>forum.id, :forum_api_key => forum.key))
       if response["succeeded"]
         list = response["message"].map do |thread| 
-          Thread.new( thread["id"],
-                      forum,
-                      thread["slug"],
-                      thread["title"],
-                      thread["created_at"],
-                      thread["allow_comments"],
-                      thread["url"],
-                      thread["identifier"] )
+          Thread.new(
+            thread["id"],
+            forum,
+            thread["slug"],
+            thread["title"],
+            thread["created_at"],
+            thread["allow_comments"],
+            thread["url"],
+            thread["identifier"]
+          )
         end
       end
     end
 
-    # returns an Array of posts belonging to this thread
+    # Returns an array of posts belonging to this thread.
     def posts(force_update = false)
       if (@posts.nil? or @posts.empty? or force_update)
         @posts = Disqus::Post.list(self)
@@ -47,22 +49,25 @@ module Disqus
     
     # Sets the provided values on the thread object.
     #
-    # options:
-    # *  :thread_id     
-    # *  :title         
-    # *  :slug          
-    # *  :url           
-    # *  :allow_comments
+    # Options:
+    #
+    # * :thread_id
+    # * :title
+    # * :slug
+    # * :url
+    # * :allow_comments
     def update(opts = {})
-      result = Disqus::Api::update_thread(opts.merge( :forum_api_key  => forum.key,
-                                                      :thread_id      => id,
-                                                      :title          => title,
-                                                      :slug           => slug,
-                                                      :url            => url,
-                                                      :allow_comments => allow_comments))
+      result = Disqus::Api::update_thread(opts.merge(
+        :forum_api_key  => forum.key,
+        :thread_id      => id,
+        :title          => title,
+        :slug           => slug,
+        :url            => url,
+        :allow_comments => allow_comments)
+      )
       return result["succeeded"]
     end
     
   end
-  
+
 end
