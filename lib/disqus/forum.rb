@@ -6,7 +6,7 @@ module Disqus
     def initialize(id, shortname, name, created_at, include_threads = false)
       @id, @shortname, @name, @created_at = id.to_i, shortname, name, Time.parse(created_at.to_s)
       @key = nil
-      @threads = include_threads ? load_threads : []
+      @forum_threads = include_threads ? load_threads : []
     end
 
     def ==(other_forum)
@@ -42,11 +42,11 @@ module Disqus
     end
     
     # Returns an array of threads belonging to this forum.
-    def threads(force_update = false)
-      if (@threads.nil? or @threads.empty? or force_update)
-        @threads = Disqus::Thread.list(self)
+    def forum_threads(force_update = false)
+      if (@forum_threads.nil? or @forum_threads.empty? or force_update)
+        @forum_threads = Disqus::Thread.list(self)
       end
-      @threads
+      @forum_threads
     end
     
     # Returns a thread associated with the given URL.

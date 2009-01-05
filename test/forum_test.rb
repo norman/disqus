@@ -40,10 +40,10 @@ class ForumTest < Test::Unit::TestCase
     assert_equal "FAKE_FORUM_API_KEY", forum.key
   end
   
-  def test_threads
+  def test_forum_threads
     forum = create_forum
     Disqus::Thread.expects(:list).with(forum).returns([thread = mock()])
-    assert_equal [thread], forum.threads
+    assert_equal [thread], forum.forum_threads
   end
   
   def test_get_thread_by_url
