@@ -20,11 +20,9 @@ connecting websites and commenters across a thriving discussion community."
 
 === Get it
 
-==== Stable release (does not yet include API):
-
   gem install disqus
 
-==== Bleeding Edge (includes API):
+==== Bleeding Edge
 
   gem install norman-disqus  --source http://gems.github.com
 

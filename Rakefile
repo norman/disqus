@@ -1,43 +1,23 @@
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
+require 'newgem'
+require 'lib/disqus/version'
 
-desc 'Default: run unit tests.'
-task :default => :test
-
-desc 'Run unit tests.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
+$hoe = Hoe.new("disqus", Disqus::Version::STRING) do |p|
+  p.rubyforge_name = "disqus"
+  p.author = ['Norman Clarke', 'Matthew Van Horn']
+  p.email = ['norman@randomba.org', 'mattvanhorn@gmail.com']
+  p.summary = "Integrates Disqus commenting system into your Ruby-powered site."
+  p.description = 'Integrates Disqus into your Ruby-powered site. Works with any Ruby website, and has view helpers for Rails and Merb.'
+  p.url = 'http://disqus.rubyforge.org'
+  p.test_globs = ['test/**/*_test.rb']
+  p.extra_deps << ['json']
+  p.extra_dev_deps = [
+    ['newgem', ">= #{::Newgem::VERSION}"],
+    ['mocha']
+  ]
+  p.rsync_args = '-av --delete --ignore-errors'
+  changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
+  p.remote_rdoc_dir = ""
 end
 
-desc "Build gem"
-task :gem do
-  sh "gem build disqus.gemspec"
-end
-
-desc "Run rcov"
-task :rcov do
-  rm_f "coverage"
-  rm_f "coverage.data"
-  if PLATFORM =~ /darwin/
-    exclude = '--exclude "gems"'
-  else
-    exclude = '--exclude "rubygems"'
-  end
-  rcov = "rcov --rails -Ilib:test --sort coverage --text-report #{exclude} --no-validator-links"
-  cmd = "#{rcov} #{Dir["test/**/*.rb"].join(" ")}"
-  sh cmd
-end
-
-desc 'Generate rdocs.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = 'Disqus'
-  rdoc.main = "README.rdoc"
-  rdoc.options << '--line-numbers' << '--inline-source' << '-c UTF-8'
-  rdoc.rdoc_files.include('lib/**/*.rb')
-  rdoc.rdoc_files.include('README.rdoc')
-end
+require 'newgem/tasks'
+Dir['tasks/**/*.rake'].each { |t| load t }

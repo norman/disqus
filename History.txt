@@ -1,0 +1,5 @@
+== 1.0.0 2009-01-05
+* 1 major enhancement:
+  * Support for Disqus API added (Matthew Van Horn)
+* 1 minor enhancement:
+  * Reorganized gem to use newgem

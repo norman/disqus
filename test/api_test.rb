@@ -63,8 +63,8 @@ class ApiTest < Test::Unit::TestCase
   
   def test_comment_form
     c = Disqus::Api::comment_form("myforum", "mythread")
-    assert_match /myforum/, c
-    assert_match /mythread/, c
+    assert_match(/myforum/, c)
+    assert_match(/mythread/, c)
   end
   
   private
