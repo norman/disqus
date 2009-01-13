@@ -36,7 +36,7 @@ connecting websites and commenters across a thriving discussion community."
   # Optional, only if you're using the API
   Disqus::defaults[:api_key] = "my_disqus_api_key"
 
-===== Rails-specific example:
+===== Rails example:
 
   # in config/development.rb (or production.rb, test.rb, etc.)
   config.after_initialize do
@@ -47,6 +47,33 @@ connecting websites and commenters across a thriving discussion community."
 
 Note that here the "after initialize" is necessary, otherwise your settings
 won't be set properly.
+
+===== Merb example:
+
+  # in config/init.rb
+  Merb::BootLoader.after_app_loads do
+    Disqus::defaults[:account] = "my_disqus_account"
+    # Optional, only if you're using the API
+    Disqus::defaults[:api_key] = "my_disqus_api_key"
+  end
+
+Note that here the "after_app_loads" is necessary, otherwise your settings
+won't be set properly.
+
+===== Options
+
+  :api_key => "" # your api key
+  :account => "", # your disqus account
+  :developer => false, # allows for threads to work on localhost
+  :container_id => 'disqus_thread', # desired thread container
+  :avatar_size => 48, # squared pixel size of avatars
+  :color => "grey", # theme color
+  :default_tab => "popular", # default widget tab
+  :hide_avatars => false, # hide or show avatars
+  :hide_mods => true, # hide or show moderation
+  :num_items => 15, # number of comments to display
+  :show_powered_by => true, # show or hide powered by line
+  :orientation => "horizontal" # comment orientation
 
 ==== Show the comment threads widget on a post page:
 
