@@ -30,7 +30,11 @@ module Disqus
         opts = Disqus::defaults.merge(opts)
         opts[:view_thread_text] ||= "View the discussion thread"
         validate_opts!(opts)
-        s = '<div id="disqus_thread"></div>'
+        s = ''
+        if opts[:developer]
+          s << '<script type="text/javascript">var disqus_developer = 1;</script>'
+        end
+        s << '<div id="disqus_thread"></div>'
         s << '<script type="text/javascript" src="' + THREAD + '"></script>'
         s << '<noscript><a href="http://%s.disqus.com/?url=ref">'
         s << opts[:view_thread_text]

@@ -21,6 +21,8 @@ module Disqus
   @defaults = {
     :api_key => "",
     :account => "",
+    :developer => false,
+    :container_id => 'disqus_thread',
     :avatar_size => 48,
     :color => "grey",
     :default_tab => "popular",
