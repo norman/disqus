@@ -3,6 +3,7 @@ MIT-LICENSE
 Manifest.txt
 README.rdoc
 Rakefile
+config/website.yml
 disqus.gemspec
 init.rb
 lib/disqus.rb
@@ -16,7 +17,6 @@ lib/disqus/view_helpers.rb
 lib/disqus/widget.rb
 tasks/rcov.rake
 test/api_test.rb
-test/config.yml
 test/config.yml.sample
 test/forum_test.rb
 test/merb_test.rb
