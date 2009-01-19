@@ -1,3 +1,8 @@
+== 1.0.1 2009-01-19
+  2 minor enhancements:
+    * Improve docs (Quin Hoxie)
+    * Add developer and container_id options for comment threads. (Quin Hoxie)
+    
 == 1.0.0 2009-01-05
 * 1 major enhancement:
   * Support for Disqus API added (Matthew Van Horn)
