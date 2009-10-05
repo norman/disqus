@@ -64,7 +64,7 @@ module Disqus
       # * <tt>:ip_address</tt> - the author's IP address
       def create_post(opts = {})
         opts[:api_key] ||= Disqus::defaults[:api_key]
-        JSON.parse(post('create_post',
+        JSON.parse(post('create_post/',
           :forum_api_key => opts[:forum_api_key],
           :thread_id     => opts[:thread_id],
           :message       => opts[:message],
