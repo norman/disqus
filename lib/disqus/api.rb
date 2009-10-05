@@ -64,17 +64,17 @@ module Disqus
       # * <tt>:ip_address</tt> - the author's IP address
       def create_post(opts = {})
         opts[:api_key] ||= Disqus::defaults[:api_key]
-        JSON.parse(post('create_post/',
+        post_data = {
           :forum_api_key => opts[:forum_api_key],
           :thread_id     => opts[:thread_id],
           :message       => opts[:message],
           :author_name   => opts[:author_name],
-          :author_email  => opts[:author_email],
-          :parent_post   => opts[:parent_post],
-          :created_at    => opts[:created_at], #UTC timestring, format: %Y-%m-%dT%H:%M
-          :author_url    => opts[:author_url],
-          :ip_address    => opts[:ip_address])
-        )
+          :author_email  => opts[:author_email]
+        }
+        [:parent_post, :created_at, :author_url, :ip_address].each do |key|
+          post_data[key] = opts[key] if opts[key]
+        end
+        JSON.parse(post('create_post/', post_data))
       end
 
       # Returns an array of hashes representing all forums the user owns. The
