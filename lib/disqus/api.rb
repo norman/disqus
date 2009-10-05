@@ -244,7 +244,7 @@ module Disqus
         url = ROOT + '/' + args.shift 
         post_params = {}
         args.shift.each { |k, v| post_params[k.to_s]=v.to_s }
-        Net::HTTP.post_form(URI.parse(url),post_params)
+        Net::HTTP.post_form(URI.parse(url),post_params).body
       end
 
       def make_url(*args)
