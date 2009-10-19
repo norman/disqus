@@ -1,10 +1,11 @@
 require 'newgem'
+require 'hoe'
 require 'lib/disqus/version'
 
 $hoe = Hoe.new("disqus", Disqus::Version::STRING) do |p|
   p.rubyforge_name = "disqus"
   p.author = ['Norman Clarke', 'Matthew Van Horn']
-  p.email = ['norman@randomba.org', 'mattvanhorn@gmail.com']
+  p.email = ['norman@njclarke.com', 'mattvanhorn@gmail.com']
   p.summary = "Integrates Disqus commenting system into your Ruby-powered site."
   p.description = 'Integrates Disqus into your Ruby-powered site. Works with any Ruby website, and has view helpers for Rails and Merb.'
   p.url = 'http://disqus.rubyforge.org'
