@@ -4,7 +4,6 @@ Manifest.txt
 README.rdoc
 Rakefile
 config/website.yml
-disqus.gemspec
 init.rb
 lib/disqus.rb
 lib/disqus/api.rb
