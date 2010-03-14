@@ -40,6 +40,7 @@ module Disqus
   class Api
     
     ROOT = 'http://disqus.com/api'
+    API_VERSION = '1.1'
   
     class << self
 
@@ -185,7 +186,7 @@ module Disqus
       # * <tt>:title</tt> - the title of the thread to possibly be created
       # * <tt>:identifier</tt> - a string of your choosing
       def thread_by_identifier(opts = {})
-        JSON.parse(post('thread_by_identifier', :forum_api_key => opts[:forum_api_key],
+        JSON.parse(post('thread_by_identifier/', :forum_api_key => opts[:forum_api_key],
                                                 :identifier => opts[:identifier],
                                                 :title => opts[:title] ))
       end
@@ -206,15 +207,7 @@ module Disqus
       # * <tt>:url</tt> - the URL this thread is on, if known.
       # * <tt>:allow_comment</tt> - whether this thread is open to new comments
       def update_thread(opts = {})
-        raise opts.inspect
-        JSON.parse(post('update_thread',
-          :forum_api_key  => opts[:forum_api_key],
-          :thread_id      => opts[:thread_id],
-          :title          => opts[:title],
-          :slug           => opts[:slug],
-          :url            => opts[:url],
-          :allow_comments => opts[:allow_comments])
-        )
+        JSON.parse(post('update_thread/', opts)
       end
       
       # Widget to includes a comment form suitable for use with the Disqus
@@ -237,10 +230,12 @@ module Disqus
       end
       
       def get(*args)
+        args << { :api_version => API_VERSION }
         open(make_url(*args)) {|u| u.read }
       end
       
       def post(*args)
+        args << { :api_version => API_VERSION }
         url = ROOT + '/' + args.shift 
         post_params = {}
         args.shift.each { |k, v| post_params[k.to_s]=v.to_s }
