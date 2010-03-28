@@ -207,7 +207,7 @@ module Disqus
       # * <tt>:url</tt> - the URL this thread is on, if known.
       # * <tt>:allow_comment</tt> - whether this thread is open to new comments
       def update_thread(opts = {})
-        JSON.parse(post('update_thread/', opts)
+        JSON.parse(post('update_thread/', opts))
       end
       
       # Widget to includes a comment form suitable for use with the Disqus
