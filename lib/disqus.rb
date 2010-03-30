@@ -1,5 +1,7 @@
-require 'disqus/widget'
-  
+%w[api author forum post thread version view_helpers widget].each do |file|
+  require File.join(File.dirname(__FILE__), "disqus", file)
+end
+
 # == From the {Disqus Website}[http://disqus.com]:
 
 # "Disqus, pronounced "discuss", is a service and tool for web comments and
@@ -19,54 +21,32 @@ require 'disqus/widget'
 module Disqus
   
   @defaults = {
-    :api_key => "",
-    :account => "",
-    :developer => false,
-    :container_id => 'disqus_thread',
-    :avatar_size => 48,
-    :color => "grey",
-    :default_tab => "popular",
-    :hide_avatars => false,
-    :hide_mods => true,
-    :num_items => 15,
+    :api_key         => "",
+    :account         => "",
+    :developer       => false,
+    :container_id    => 'disqus_thread',
+    :avatar_size     => 48,
+    :color           => "grey",
+    :default_tab     => "popular",
+    :hide_avatars    => false,
+    :hide_mods       => true,
+    :num_items       => 15,
     :show_powered_by => true,
-    :orientation => "horizontal"
+    :orientation     => "horizontal"
   }
   
   # Disqus defaults:
-  #  :account => "",
-  #  :avatar_size => 48,
-  #  :color => "grey",
-  #  :default_tab => "popular",
-  #  :hide_avatars => false,
-  #  :hide_mods => true,
-  #  :num_items => 15,
+  #  :account         => "",
+  #  :avatar_size     => 48,
+  #  :color           => "grey",
+  #  :default_tab     => "popular",
+  #  :hide_avatars    => false,
+  #  :hide_mods       => true,
+  #  :num_items       => 15,
   #  :show_powered_by => true,
-  #  :orientation => "horizontal"
+  #  :orientation     => "horizontal"
   def self.defaults
     @defaults
   end
-  
-  # Load the view helpers if the gem is included in a Rails app.
-  def self.enable_rails
-    return if ActionView::Base.instance_methods.include? 'disqus_thread'
-    require 'disqus/view_helpers'
-    ActionView::Base.class_eval { include Disqus::ViewHelpers }
-  end
 
-  # Load the view helpers if the gem is included in a Merb app.
-  def self.enable_merb
-    return if Merb::Controller.instance_methods.include? 'disqus_thread'
-    require 'disqus/view_helpers'
-    Merb::Controller.class_eval { include Disqus::ViewHelpers }
-  end
-
-end
-
-if defined?(Rails) and defined?(ActionView)
-  Disqus::enable_rails
-end
-
-if defined?(Merb)
-  Disqus::enable_merb
 end

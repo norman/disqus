@@ -1,24 +1,26 @@
-require 'newgem'
-require 'hoe'
+require "rake"
+require "rake/testtask"
+require "rake/gempackagetask"
+require "rake/rdoctask"
+require "rake/clean"
 require 'lib/disqus/version'
 
-$hoe = Hoe.new("disqus", Disqus::Version::STRING) do |p|
-  p.rubyforge_name = "disqus"
-  p.author = ['Norman Clarke', 'Matthew Van Horn']
-  p.email = ['norman@njclarke.com', 'mattvanhorn@gmail.com']
-  p.summary = "Integrates Disqus commenting system into your Ruby-powered site."
-  p.description = 'Integrates Disqus into your Ruby-powered site. Works with any Ruby website, and has view helpers for Rails and Merb.'
-  p.url = 'http://disqus.rubyforge.org'
-  p.test_globs = ['test/**/*_test.rb']
-  p.extra_deps << ['json']
-  p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"],
-    ['mocha']
-  ]
-  p.rsync_args = '-av --delete --ignore-errors'
-  changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
-  p.remote_rdoc_dir = ""
+CLEAN << "pkg" << "doc" << "coverage"
+
+Rake::GemPackageTask.new(eval(File.read("disqus.gemspec"))) { |pkg| }
+Rake::TestTask.new(:test) { |t| t.pattern = "test/*_test.rb" }
+
+Rake::RDocTask.new do |r|
+  r.rdoc_dir = "doc"
+  r.rdoc_files.include "lib/**/*.rb"
 end
 
-require 'newgem/tasks'
-Dir['tasks/**/*.rake'].each { |t| load t }
+begin
+  require "rcov/rcovtask"
+  Rcov::RcovTask.new do |r|
+    r.test_files = FileList["test/**/*_test.rb"]
+    r.verbose = true
+    r.rcov_opts << "--exclude gems/*"
+  end
+rescue LoadError
+end

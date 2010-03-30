@@ -1,6 +1,0 @@
-require 'disques/api'
-require 'disques/author'
-require 'disques/forum'
-require 'disques/post'
-require 'disques/thread'
-require 'disques/version'

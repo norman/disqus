@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/test_helper'
 class ForumTest < Test::Unit::TestCase
   
   def setup
-    require 'disqus'
     Disqus.defaults[:api_key] = DISQUS_TEST["api_key"]
     stub_api_call(:get_forum_api_key).returns("FAKE_FORUM_API_KEY")
   end
