@@ -13,14 +13,14 @@ From the Disqus website:
 > discussions. The Disqus comment system can be plugged into any website, blog,
 > or application. Disqus makes commenting easier and more interactive, while
 > connecting websites and commenters across a thriving discussion community."
-> 
+>
 > "Disqus is a free service to the general public with absolutely no inline advertisements."
 
 
 ### Getting it
 
     gem install disqus
-    
+
 ### Using it
 
 #### Configure it
@@ -49,24 +49,24 @@ From the Disqus website:
 
     # Loads the commenting system
     disqus_thread
-  
+
     # Sets the inner html to the comment count for any links on the page that
     # have the anchor "disqus_thread". For example, "View Comments" below would
     # be replaced by "1 comment" or "23 comments" etc.
     # <a href="http://my.website/article-permalink#disqus_thread">View Comments</a>
     # <a href="http://my.website/different-permalink#disqus_thread">View Comments</a>
     disqus_comment_counts
-  
+
 #### Show the combo widget on a post page
 
     disqus_combo(:color => "blue", :hide_mods => false, :num_items => 20)
-  
+
 #### Show the comment count on a permalink
 
     link_to("Permalink", post_path(@post, :anchor => "disqus_thread"))
     ...
     disqus_comment_counts
-  
+
 #### Work with the Disqus API
 
 See the Disqus::Api class for more info on the Disqus API. You can also read the
@@ -74,8 +74,8 @@ See the Disqus::Api class for more info on the Disqus API. You can also read the
 
 ### Hack it
 
-Github repository: 
-  
+Github repository:
+
 [http://github.com/norman/disqus](http://github.com/norman/disqus)
 
 ### Learn more about Disqus:
@@ -84,8 +84,8 @@ Github repository:
 
 ### Thanks to the following contributors:
 
-* {Matt Van Horn}[http://github.com/mattvanhorn] - Disqus API
-* {Quin Hoxie}[http://github.com/qhoxie] - Merb support
+* [Matt Van Horn](http://github.com/mattvanhorn) - Disqus API
+* [Quin Hoxie](http://github.com/qhoxie) - Merb support
 
 ### Legal Stuff
 
