@@ -29,8 +29,7 @@ module Disqus
     
     # Returns a Forum object corresponding to the given forum_id or nil if it was not found.
     def self.find(forum_id, user_api_key = nil)
-      opts = user_api_key ? {:api_key => user_api_key} : {}
-      list = Forum.list(opts)
+      list = Forum.list(user_api_key)
       if list
         list.select{|f| f.id == forum_id}.first
       end
