@@ -61,7 +61,7 @@ module Disqus
         validate_opts!(opts)
         s = <<-WHIMPER
         <script type="text/javascript">
-        //<[CDATA[
+        //<![CDATA[
         (function() {
             var links = document.getElementsByTagName('a');
             var query = '?';
