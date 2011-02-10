@@ -1,5 +1,3 @@
-require 'disqus/version'
-
 spec = Gem::Specification.new do |s|
 
   s.name              = "disqus"
