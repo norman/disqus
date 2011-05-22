@@ -1,3 +1,6 @@
+require 'base64'
+require 'openssl'
+
 module Disqus
 
   # Disqus Widget generator.
@@ -21,6 +24,9 @@ module Disqus
     RECENT = ROOT_PATH + 'recent_comments_widget.js?num_items=%d&avatar_size=%d'
     POPULAR = ROOT_PATH + 'popular_threads_widget.js?num_items=%d'
     TOP = ROOT_PATH + 'top_commenters_widget.js?num_items=%d&avatar_size=%d&orientation=%s'
+    
+    DIGEST  = OpenSSL::Digest::Digest.new('sha1')
+
     class << self
       
       # Show the main Disqus thread widget.
@@ -34,6 +40,7 @@ module Disqus
         if opts[:developer]
           s << '<script type="text/javascript">var disqus_developer = 1;</script>'
         end
+        
         s << '<div id="disqus_thread"></div>'
         s << '<script type="text/javascript" src="' + THREAD + '"></script>'
         s << '<noscript><a href="http://%s.disqus.com/?url=ref">'
@@ -166,8 +173,52 @@ module Disqus
         s << '"></script>' 
         s % [opts[:account], opts[:num_items], opts[:color], opts[:default_tab]]
       end
+
+
+      # Single Sign-On | Login
+      # Options:
+      # * <tt>:public_key:</tt>
+      # * <tt>:secret_key:</tt>
+      # * <tt>:user_id:</tt> any unique user ID number associated with that account within your user database. This will be used to generate a unique username to reference in the Disqus system.
+      # * <tt>:username:</tt> The displayed name for that account
+      # * <tt>:email:</tt> The registered email address for that account
+      # * <tt>:avatar:</tt> A link to that user's avatar (optional)
+      # * <tt>:url:</tt> A link to the user's website (optional)
+      def sso_login(opts = {})
+        opts = Disqus::defaults.merge(opts)
+        sso :login, opts
+      end
+      
+      # Single Sign-On | Logout
+      # Options:
+      # * <tt>:public_key:</tt>
+      # * <tt>:secret_key:</tt>
+      def sso_logout(opts = {})
+        opts = Disqus::defaults.merge(opts)
+        sso :logout, opts
+      end
       
       private
+
+      def sso action, opts
+        message = (action == :login ? {'id' => opts[:user_id], 'username' => opts[:username], 'email' => opts[:email]} : {})
+        message = Base64.encode64(message.to_json).gsub("\n", "")
+        timestamp = Time.now.to_i
+
+        signature = OpenSSL::HMAC.hexdigest(DIGEST, opts[:secret_key], "#{message} #{timestamp}")
+
+        s = '<script type="text/javascript">'
+        s << 'var disqus_config = function() {'
+        
+        if opts[:logout_link]
+          s << 'this.sso = {'
+          s << 'logout:  "%s"};' % opts[:logout_link]
+        end
+
+        s << 'this.page.remote_auth_s3 = "%s %s %s";' % [message, signature, timestamp]
+        s << 'this.page.api_key = "%s";}' % opts[:public_key]        
+        s << '</script>'
+      end
 
       def validate_opts!(opts)
         raise ArgumentError.new("You must specify an :account") if !opts[:account]
