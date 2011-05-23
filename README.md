@@ -1,5 +1,11 @@
 # Disqus
 
+<hr/>
+**NOTE** I am no longer using this library and would like to hand if off to
+another maintainer. If you're interested in using this and would like to take
+over, please send me a message.
+<hr/>
+
 The Disqus Gem helps you easily integrate the [Disqus](http://disqus.com)
 commenting system into your Ruby-based website. It includes a Ruby wrapper for
 [Disqus's REST API](http://wiki.disqus.net/API), and views helpers to generate
