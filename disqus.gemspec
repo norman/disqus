@@ -10,7 +10,6 @@ spec = Gem::Specification.new do |s|
   s.summary           = "Integrates Disqus commenting system into your Ruby-powered site."
   s.description       = 'Integrates Disqus into your Ruby-powered site. Works with any Ruby website, and has view helpers for Rails and Merb.'
   s.homepage          = 'http://github.com/norman/disqus'
-  s.has_rdoc          = true
   s.platform          = Gem::Platform::RUBY
 
   s.files             = Dir["lib/**/*.rb", "lib/**/*.rake", "*.rdoc", "LICENSE", "Rakefile", "test/**/*.*"]
