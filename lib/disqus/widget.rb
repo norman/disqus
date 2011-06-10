@@ -35,15 +35,24 @@ module Disqus
           s << '<script type="text/javascript">var disqus_developer = 1;</script>'
         end
         s << '<div id="disqus_thread"></div>'
-        s << '<script type="text/javascript" src="' + THREAD + '"></script>'
-        s << '<noscript><a href="http://%s.disqus.com/?url=ref">'
+        s << '<script type="text/javascript">'
+        s << 'var disqus_shortname = \'' + opts[:account] + '\'';
+        s << <<-EOF
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            EOF
+        s << '</script>'
+        s << '<noscript>Please enable JavaScript to <a href="http://%s.disqus.com/?url=ref">'
         s << opts[:view_thread_text]
         s << '</a></noscript>'
         if opts[:show_powered_by]
           s << '<a href="http://disqus.com" class="dsq-brlink">blog comments '
           s << 'powered by <span class="logo-disqus">Disqus</span></a>'
         end
-        s % [opts[:account], opts[:account]]
+        s % [opts[:account]]
       end
       
       # Loads Javascript to show the number of comments for the page.
