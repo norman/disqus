@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 (2011-06-11)
+* Changed javascript to load asynchronously
+* added disqus optional parameters :permalink, :identifier to disqus_thread
+
 ## 1.0.3 (2010-03-30)
 
 * Updates for API version 1.1 (Fabio Akita)
