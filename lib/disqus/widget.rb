@@ -37,6 +37,7 @@ module Disqus
         s << '<div id="disqus_thread"></div>'
         s << '<script type="text/javascript">'
         s << 'var disqus_shortname = \'' + opts[:account] + '\'';
+        s << "var disqus_identifier = '#{opts[:identifier]}';" if opts[:identifier]
         s << <<-EOF
             (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
