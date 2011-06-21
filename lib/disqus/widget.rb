@@ -28,7 +28,7 @@ module Disqus
       # * <tt>account:</tt> Your Discus account (required).
       def thread(opts = {})
         opts = Disqus::defaults.merge(opts)
-        opts[:view_thread_text] ||= "View the discussion thread"
+        opts[:view_thread_text] ||= "view the discussion thread"
         validate_opts!(opts)
         s = ''
         if opts[:developer]
@@ -36,7 +36,7 @@ module Disqus
         end
         s << '<div id="disqus_thread"></div>'
         s << '<script type="text/javascript">'
-        s << 'var disqus_shortname = \'' + opts[:account] + '\'';
+        s << 'var disqus_shortname = \'' + opts[:account] + '\';';
         s << "var disqus_identifier = '#{opts[:identifier]}';" if opts[:identifier]
         s << "var disqus_url = '#{opts[:permalink]}';" if opts[:permalink]
         s << <<-EOF
