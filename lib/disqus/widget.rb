@@ -36,9 +36,9 @@ module Disqus
         end
         s << '<div id="disqus_thread"></div>'
         s << '<script type="text/javascript">'
-        s << 'var disqus_shortname = \'' + opts[:account] + '\';';
-        s << "var disqus_identifier = '#{opts[:identifier]}';" if opts[:identifier]
-        s << "var disqus_url = '#{opts[:permalink]}';" if opts[:permalink]
+        s << "var disqus_shortname = '#{opts[:account]}';\n";
+        s << "var disqus_identifier = '#{opts[:identifier]}';\n" if opts[:identifier]
+        s << "var disqus_url = '#{opts[:permalink]}'\n;" if opts[:permalink]
         s << <<-EOF
             (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -46,7 +46,7 @@ module Disqus
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             })();
             EOF
-        s << '</script>'
+        s << "\n</script>"
         s << '<noscript>Please enable JavaScript to <a href="http://%s.disqus.com/?url=ref">'
         s << opts[:view_thread_text]
         s << '</a></noscript>'
