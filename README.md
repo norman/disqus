@@ -54,7 +54,7 @@ From the Disqus website:
 #### Show the comment threads widget on a post page
 
     # Loads the commenting system
-    disqus_thread
+    <%= raw(disqus_thread) %>
 
     # Sets the inner html to the comment count for any links on the page that
     # have the anchor "disqus_thread". For example, "View Comments" below would
