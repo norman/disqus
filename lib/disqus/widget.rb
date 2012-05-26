@@ -34,6 +34,9 @@ module Disqus
         if opts[:developer]
           s << '<script type="text/javascript">var disqus_developer = 1;</script>'
         end
+        if opts[:identifier]
+          s << '<script type="text/javascript">var disqus_identifier = "' + opts[:identifier].to_s + '";</script>'
+        end
         s << '<div id="disqus_thread"></div>'
         s << '<script type="text/javascript" src="' + THREAD + '"></script>'
         s << '<noscript><a href="http://%s.disqus.com/?url=ref">'
