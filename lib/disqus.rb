@@ -1,4 +1,4 @@
-%w[api author forum post thread version view_helpers widget].each do |file|
+%w[api author forum post thread view_helpers widget].each do |file|
   require File.join(File.dirname(__FILE__), "disqus", file)
 end
 

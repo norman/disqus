@@ -28,6 +28,14 @@ class DisqusWidgetTest < Test::Unit::TestCase
     assert disqus_top_commenters
   end
 
+  def test_sso_login
+    assert disqus_sso_login(:public_key => 'app_public', :secret_key => 'app_secret', :user_id => 1, :username => 'Vasya Pupkin', :email => 'vasya@pupkin.ru')
+  end
+
+  def test_sso_logout
+    assert disqus_sso_logout(:public_key => 'app_public', :secret_key => 'app_secret')
+  end
+
   def test_invalid_default_tab
     assert_raises ArgumentError do
       disqus_combo(:default_tab => "test")
